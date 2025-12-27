@@ -1,14 +1,15 @@
 import sqlite3
 from contextlib import contextmanager
 from fastmcp import FastMCP
+from pathlib import Path
 
 mcp = FastMCP("Banking MCP Server")
 
-DB_NAME = "banking.db"
+DB_PATH = Path(__file__).parent / "db.sqlite"
 
 @contextmanager
 def get_db():
-    conn = sqlite3.connect(DB_NAME)
+    conn = sqlite3.connect(DB_PATH)
     conn.row_factory = sqlite3.Row
     try:
         yield conn
