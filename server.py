@@ -1,3 +1,4 @@
+import os
 import sqlite3
 from contextlib import contextmanager
 from fastmcp import FastMCP
@@ -277,4 +278,9 @@ def list_accounts() -> str:
         return result
 
 if __name__ == "__main__":
-    mcp.run(transport="streamable-http", host="127.0.0.1", port=8000)
+
+    mcp.run(
+        transport="streamable-http",
+        host="0.0.0.0",
+        port=int(os.environ.get("PORT", 8000))
+    )
